@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+<body></body>
+<script rel="prefetch" type="application/x-javascript" src="spice.js"></script>
+<script rel="prefetch" type="application/x-javascript" src="hakioball.js"></script>
+<script rel="prefetch" type="application/x-javascript" src="http://www.livejs.com/live.js"></script>
+<script rel="prefetch" name="main" type="text/javascript" defer>
+	App.OnLoad = function(){
+		App.Init("Hakio",320,480);
+	}
+	_Main.prototype = {
+		init:function() {
+			Hakioball.img = this.graphics.load('hball');
+			
+			this.app.ext.metatag.metaAppend(this.app.ext.metatag.metaLink("icon.png","shortcut icon","image/png"));
+			this.app.ext.debug.toggle("off");
+			this.app.canvas.background_set("#000000");
+			//this.app.ext.top();
+			this.w = this.app.client.setWidth;
+			this.h = this.app.client.setHeight;
+			//this.app.client.c.style.pointerEvents = "none";
+			this.rect = Object.create(_Rectangle.prototype);
+			this.x = 0;
+			this.y = 0;
+			
+			
+			this.title = this.graphics.load('10318659_10152089514903240_1639435628_n');
+			this.start = false;
+			return true;
+			},
+		update:function() {
+			if (this.start)
+			Hakioball.update();
+			return true;
+			},
+		draw:function() {
+						this.visuals.rect_ext(this.x,this.y,this.w,this.h,1,1,false,"#DDDDDD");
+						this.visuals.circle_free(this.app.ext.input.x,this.app.ext.input.y,1,"#000000",1);
+			Hakioball.draw();
+			Hakiohud.draw();
+			
+			if (!this.start)
+			{
+				this.visuals.text("Touch to begin",this.w/2.85,Math.sin(new Date/120)+this.h/2);
+				if (this.app.ext.input.press)
+					this.start = true;
+			}
+			var x = -130;
+			var y = 45;
+			this.visuals.image_part(this.title,x+this.w/2,y,0.6,1,1,0,0,210,300);
+			x = -35;
+			
+			this.visuals.image_part(this.title,x+this.w/2,y,0.6,1,1,210,0,110,300);
+			
+			var xw = 330;
+			x = 35;
+			this.visuals.image_part(this.title,x+this.w/2,y,0.6,1,1,xw,0,110,300);
+			
+			x +=60;
+			xw+=120;
+			this.visuals.image_part(this.title,x+this.w/2,y,0.6,1,1,xw,0,160,300);
+			return true;
+			}
+	};
+	
+</script>
+</html>
